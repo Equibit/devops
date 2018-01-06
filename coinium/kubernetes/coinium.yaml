@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: coinium-serv-deployment
+  labels:
+    app: coinium-serv-app
+    tier: coinium
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: coinium-serv-app
+        tier: coinium
+    spec:
+      volumes:
+      - name: coinium-serv-pv-storage
+        persistentVolumeClaim:
+          claimName: coinium-serv-pv-claim
+      containers:
+      - name: coinium-serv
+        image: "registry.ng.bluemix.net/equibit_group_dev/coinium-serv:0.2.5"
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: coinium-serv-pv-storage
+          mountPath: "/home/coinium/.coinium"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coinium-serv-service
+  labels:
+    tier: coinium
+spec:
+  type: ClusterIP
+  selector:
+    app: coinium-serv-app
+    tier: coinium
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: coinium-serv-port

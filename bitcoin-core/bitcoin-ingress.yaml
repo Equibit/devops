@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: bitcoin-ingress
+spec:
+  rules:
+  - host: bitcoin.equibit-dev.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - backend:
+          serviceName: bitcoin-core-service
+          servicePort: 80

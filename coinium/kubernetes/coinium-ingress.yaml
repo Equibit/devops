@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: coinium-ingress
+spec:
+  rules:
+  - host: coinium.equibit-group-dev.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - backend:
+          serviceName: coinium-serv-service
+          servicePort: 80

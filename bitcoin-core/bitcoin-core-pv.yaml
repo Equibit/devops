@@ -1,0 +1,15 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: bitcoin-core-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 200Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: "fsf-tor0101a-fz.service.softlayer.com"
+    path: "/IBM02SV1327433_1/data01"

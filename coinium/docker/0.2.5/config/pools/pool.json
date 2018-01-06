@@ -1,0 +1,29 @@
+{
+    "enabled": false,
+    "coin": "litecoin.json",
+    "daemon": {
+        "port": 9333,
+        "username": "equibitdev",
+        "password": "jmx4wvlR1GU0nMct06btvexrDQ9Pi0_TC8cJhNs3kVE="
+    },
+    "wallet": {
+        "address": "LaWPvrDYHJ1EssBSSqaNX2W9YrARkMyg3m"
+    },
+    "rewards": [
+        {
+            "myxWybbhUkGzGF7yaf2QVNx3hh3HWTya5t": 1
+        }
+    ],
+    "stratum": {
+        "port": 3333
+    },
+    "storage": {
+        "hybrid": {
+          "mysql": {
+            "database": "dbname",
+            "username": "root",
+            "password": ""
+          }
+        }
+    }
+}
