@@ -2,7 +2,7 @@
 
 Step-1: Install Bluemix CLI and Kubectl, instructions can be found here -> https://console.bluemix.net/docs/containers/cs_cli_install.html
 
-Step-2: Send your email to Harmeek for IBM Cloud access
+Step-2: Open an IBM Cloud account and send your email to Harmeek/Chris for cluster access
 
 Step-3(OPTIONAL): Run the following command to view Kubernetes clusters:
 ```
