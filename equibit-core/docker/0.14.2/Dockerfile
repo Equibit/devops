@@ -10,8 +10,8 @@ ENV EQUIBIT_DATA=/home/equibit/.equibit \
 WORKDIR /root/equibit/source
 
 RUN git clone -b edc-core-0.14.2 https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/equibit-core.git
-RUN ls -ltr /home/equibit/
-RUN /root/equibit/source/equibit-core/edc/linux-ubuntu/build.scripts/build.core.sh
+RUN cd /root/equibit/source/equibit-core/edc/linux-ubuntu/build.scripts/
+RUN ./build.core.sh
 RUN ls -ltr /root/equibit/source/equibit-core/src/
 
 RUN mkdir -p /opt/equibit-${EQUIBIT_VERSION}/
