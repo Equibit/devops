@@ -10,15 +10,14 @@ ENV EQUIBIT_DATA=/home/equibit/.equibit \
 WORKDIR /root/equibit/source
 
 RUN git clone -b edc-core-0.14.2 https://Equibit:f41c78627c23717323d6dc2a83fe9193b09b13f7@github.com/Equibit/equibit-core.git
-RUN cd /root/equibit/source/equibit-core/edc/linux-ubuntu/build.scripts/
-RUN ./build.core.sh
-RUN ls -ltr /root/equibit/source/equibit-core/src/
 
-RUN mkdir -p /opt/equibit-${EQUIBIT_VERSION}/
-RUN mv /root/equibit/source/equibit-core/src/equibitd /opt/equibit-${EQUIBIT_VERSION}/
-RUN mv /root/equibit/source/equibit-core/src/bitcoin-cli /opt/equibit-${EQUIBIT_VERSION}/equibit-cli
-RUN ls -ltr /opt/equibit-${EQUIBIT_VERSION}/
-
+RUN cd /root/equibit/source/equibit-core/edc/linux-ubuntu/build.scripts/ && \
+    ./build.core.sh && \
+    ls -ltr /root/equibit/source/equibit-core/src/ && \
+    mkdir -p /opt/equibit-${EQUIBIT_VERSION}/ && \
+    mv /root/equibit/source/equibit-core/src/equibitd /opt/equibit-${EQUIBIT_VERSION}/ && \
+    mv /root/equibit/source/equibit-core/src/bitcoin-cli /opt/equibit-${EQUIBIT_VERSION}/equibit-cli && \
+    ls -ltr /opt/equibit-${EQUIBIT_VERSION}/
 
 VOLUME ["/home/equibit/.equibit"]
 
