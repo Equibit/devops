@@ -48,6 +48,7 @@ root       336  0.0  0.0  18252  3236 pts/0    Ss   19:03   0:00 bash
 equibit    351  0.0  0.0  18240  3220 pts/0    S    19:04   0:00 bash
 equibit    358  0.0  0.0  34424  2960 pts/0    R+   19:05   0:00 ps aux
 ```
+
 Step-8b(OPTIONAL): Run the following commands to view used ports:
 ```
 equibit@equibit-group-deployment-5d454888f7-d6gn6:/$ netstat -tulpn
@@ -67,3 +68,13 @@ Equibit binary directory: /opt/equibit-0.14.2
 Equibit config file: /home/equibit/.equibit/equibit.conf
 Equibit start command: equibitd
 ```
+
+# Equibit Build Setup
+
+Base Docker Image: registry.ng.bluemix.net/equibit/equibit-ubuntu:16.04
+Equibit Docker Image: registry.ng.bluemix.net/equibit/equibit-core:latest
+
+DEV Pipeline: https://console.bluemix.net/devops/toolchains/5ea48630-e6c7-4464-a876-bc69345f72e4?env_id=ibm:yp:us-south
+
+JSONRPC:
+```curl -v --data-binary '{"jsonrpc": "1.0","method": "getmininginfo", "params": [] }' -H 'content-type: text/plain;' http://equibitdev:<token>@equibit-group-dev.us-east.containers.mybluemix.net/```
