@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: equibit-group-deployment
+  labels:
+    app: equibit-group-app
+    tier: equibit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: equibit-group-app
+        tier: equibit
+    spec:
+      volumes:
+      - name: equibit-group-pv-storage
+        persistentVolumeClaim:
+          claimName: equibit-group-pv-claim
+      containers:
+      - name: equibit-group
+        image: "registry.ng.bluemix.net/equibitqa/equibit-core-qa:latest"
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: equibit-group-pv-storage
+          mountPath: "/home/equibit/.equibit"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: equibit-group-service
+  labels:
+    tier: equibit
+spec:
+  type: ClusterIP
+  selector:
+    app: equibit-group-app
+    tier: equibit
+  ports:
+  - port: 80
+    targetPort: 18331
+    protocol: TCP
+    name: equibit-group-port
