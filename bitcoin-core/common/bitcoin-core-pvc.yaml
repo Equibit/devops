@@ -2,10 +2,11 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: bitcoin-core-pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
 spec:
-  storageClassName: manual
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 200Gi
