@@ -19,7 +19,7 @@ spec:
           claimName: equibit-group-pv-claim
       containers:
       - name: equibit-group
-        image: "registry.ng.bluemix.net/equibitdev/equibit-core-dev:latest"
+        image: "registry.ng.bluemix.net/equibitqa/equibit-core-qa:latest"
         imagePullPolicy: Always
         volumeMounts:
         - name: equibit-group-pv-storage
@@ -32,12 +32,12 @@ metadata:
   labels:
     tier: equibit
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: equibit-group-app
     tier: equibit
   ports:
-  - port: 80
+  - port: 18331
     targetPort: 18331
     protocol: TCP
     name: equibit-group-port
