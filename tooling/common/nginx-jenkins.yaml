@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-jenkins-deployment
+  labels:
+    app: nginx-jenkins-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-jenkins-app
+    spec:
+      volumes:
+      - name: nginx-jenkins-pv-storage
+        persistentVolumeClaim:
+          claimName: jenkins-pv-claim
+      containers:
+      - name: nginx-jenkins
+        image: "nginx:latest"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: nginx-jenkins-pv-storage
+          mountPath: "/tmp/nginx"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-jenkins-service
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx-jenkins-app
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: nginx-jenkins-port

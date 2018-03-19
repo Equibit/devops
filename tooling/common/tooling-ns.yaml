@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tooling
+  resourceVersion: "10"
+spec:
+  finalizers:
+  - kubernetes
+
