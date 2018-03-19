@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: equibit-miner-deployment
+  labels:
+    app: equibit-miner-app
+    tier: equibit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: equibit-miner-app
+        tier: equibit
+    spec:
+      containers:
+      - name: equibit-miner
+        image: "registry.ng.bluemix.net/equibit/eqb-miner-dev:latest"
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: equibit-miner-service
+  labels:
+    tier: equibit
+spec:
+  type: LoadBalancer
+  selector:
+    app: equibit-miner-app
+    tier: equibit
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: equibit-miner-port
