@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: equibit-group-regtest-deployment
+  labels:
+    app: equibit-group-regtest-app
+    tier: equibit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: equibit-group-regtest-app
+        tier: equibit
+    spec:
+      volumes:
+      - name: equibit-group-regtest-pv-storage
+        persistentVolumeClaim:
+          claimName: equibit-group-regtest-pv-claim
+      containers:
+      - name: equibit-group-regtest
+        image: "registry.ng.bluemix.net/equibit/equibit-core-dev:latest"
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: equibit-group-regtest-pv-storage
+          mountPath: "/home/equibit/.equibit"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: equibit-group-regtest-service
+  labels:
+    tier: equibit
+spec:
+  type: LoadBalancer
+  selector:
+    app: equibit-group-regtest-app
+    tier: equibit
+  ports:
+  - port: 18331
+    targetPort: 18331
+    protocol: TCP
+    name: equibit-group-regtest-port
