@@ -18,19 +18,3 @@ spec:
         image: "registry.ng.bluemix.net/equibit/eqb-miner-dev:latest"
         imagePullPolicy: Always
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: equibit-miner-service
-  labels:
-    tier: equibit
-spec:
-  type: LoadBalancer
-  selector:
-    app: equibit-miner-app
-    tier: equibit
-  ports:
-  - port: 80
-    targetPort: 80
-    protocol: TCP
-    name: equibit-miner-port
