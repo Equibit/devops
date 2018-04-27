@@ -6,7 +6,7 @@ var gitCommit        = process.env.GIT_COMMIT
 var pipelineId       = process.env.PIPELINE_ID
 var ibmUrl           = "https://console.bluemix.net/devops/pipelines/"
 var senderAddress    = "IBM Builds <equibit.builds@gmail.com>"
-var fromAddresss     = "hjhutty@gmail.com"
+var fromAddress     = "hjhutty@gmail.com"
 
 console.log(process.env)
 
