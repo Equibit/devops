@@ -9,8 +9,8 @@ var smtpTransport = nodemailer.createTransport("smtps://equibit.builds%40gmail.c
 var mailOptions = {
     from: "IBM Builds <equibit.builds@gmail.com>", // sender address
     to: "hjhutty@gmail.com", // list of receivers
-    subject: "BUILD process.env.BUILD_DISPLAY_NAME ( process.env.GIT_BRANCH - process.env.GIT_COMMIT )", // Subject line
-    html: "<b>Build process.env.BUILD_DISPLAY_NAME : Status</b><br /><br />BUILD LINK: https://console.bluemix.net/devops/pipelines/process.env.PIPELINE_ID?env_id=ibm:yp:us-south<br /><br />" // html body
+    subject: 'BUILD (process.env.BUILD_DISPLAY_NAME) ( (process.env.GIT_BRANCH) - (process.env.GIT_COMMIT) )', // Subject line
+    html: "<b>Build (process.env.BUILD_DISPLAY_NAME) : PASSED</b><br /><br />BUILD LINK: https://console.bluemix.net/devops/pipelines/(process.env.PIPELINE_ID)?env_id=ibm:yp:us-south<br /><br />Environment: (process.env)" // html body
 }
 
 // send mail with defined transport object
