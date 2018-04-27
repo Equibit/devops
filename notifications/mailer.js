@@ -24,5 +24,4 @@ smtpTransport.sendMail(mailOptions, function(error, response){
 
     // if you don't want to use this transport object anymore, uncomment following line
     //smtpTransport.close(); // shut down the connection pool, no more messages
-});
-~            
+});       
