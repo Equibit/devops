@@ -9,9 +9,8 @@ var smtpTransport = nodemailer.createTransport("smtps://equibit.builds%40gmail.c
 var mailOptions = {
     from: "IBM Builds <equibit.builds@gmail.com>", // sender address
     to: "hjhutty@gmail.com", // list of receivers
-    subject: "Hello Builds", // Subject line
-    text: "Hello from IBM Cloud", // plaintext body
-    html: "<b>Hello from IBM Cloud</b>" // html body
+    subject: "BUILD process.env.BUILD_DISPLAY_NAME ( process.env.GIT_BRANCH - process.env.GIT_COMMIT )", // Subject line
+    html: "<b>Build process.env.BUILD_DISPLAY_NAME : Status</b><br /><br />BUILD LINK: https://console.bluemix.net/devops/pipelines/process.env.PIPELINE_ID?env_id=ibm:yp:us-south<br /><br />" // html body
 }
 
 // send mail with defined transport object
@@ -23,5 +22,5 @@ smtpTransport.sendMail(mailOptions, function(error, response){
     }
 
     // if you don't want to use this transport object anymore, uncomment following line
-    //smtpTransport.close(); // shut down the connection pool, no more messages
+    smtpTransport.close(); // shut down the connection pool, no more messages
 });       
