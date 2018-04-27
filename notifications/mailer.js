@@ -5,7 +5,7 @@ var gitBranch        = process.env.GIT_BRANCH
 var gitCommit        = process.env.GIT_COMMIT
 var pipelineId       = process.env.PIPELINE_ID
 var ibmUrl           = "https://console.bluemix.net/devops/pipelines/"
-var senderAddress    = "IBM Builds <equibit.builds@gmail.com>"
+var senderAddress    = "Equibit Builds <equibit.builds@gmail.com>"
 var fromAddress     = "hjhutty@gmail.com"
 
 console.log(process.env)
@@ -17,8 +17,8 @@ var smtpTransport = nodemailer.createTransport("smtps://equibit.builds%40gmail.c
 var mailOptions = {
     from: senderAddress, // sender address
     to: fromAddress, // list of receivers
-    subject: "BUILD buildDisplayName ( gitBranch - gitCommit )", // Subject line
-    html: "<b>Build buildDisplayName : PASSED</b><br /><br />BUILD LINK: " + ibmUrl + pipelineId + "?env_id=ibm:yp:us-south<br /><br />Environment: " + process.env // html body
+    subject: "BUILD buildDisplayName (" + gitBranch + "-" + gitCommit + ")", // Subject line
+    html: "<b>Build buildDisplayName : PASSED</b><br /><br />BUILD LINK: " + ibmUrl + pipelineId + "?env_id=ibm:yp:us-south<br /><br />Environment: " + console.log(process.env) // html body
 }
 
 // send mail with defined transport object
