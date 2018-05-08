@@ -7,6 +7,7 @@ var idsJobId         = process.env.IDS_JOB_ID
 var taskId           = process.env.TASK_ID
 var idsStageName     = process.env.IDS_STAGE_NAME
 var senderAddress    = "autobot@equibitgroup.com"
+var senderPassword   = process.env.EMAIL_PWD
 var recipientAddress = process.env.RECIPIENT_ADDRESS
 var idsProjectName   = process.env.IDS_PROJECT_NAME
 var buildStatus      = process.env.BUILD_STATUS
@@ -15,7 +16,20 @@ var ibmUrl           = "https://console.bluemix.net/devops/pipelines/"
 //console.log(process.env)
 
 // create reusable transport method (opens pool of SMTP connections)
-var smtpTransport = nodemailer.createTransport("smtps://autobot%40equibitgroup.com:"+encodeURIComponent("" + process.env.EMAIL_PWD + "") + "@smtp.office365.com:587");
+// var smtpTransport = nodemailer.createTransport("smtps://autobot%40equibitgroup.com:"+encodeURIComponent("" + process.env.EMAIL_PWD + "") + "@smtp.office365.com:587");
+
+var smtpTransport = nodemailer.createTransport({
+        host: 'smtp.office365.com', // Office 365 server
+        port: 587,     // secure SMTP
+        secure: false, // false for TLS - as a boolean not string - but the default is false so just remove this completely
+        auth: {
+            user: senderAddress,
+            pass: senderPassword
+        },
+        tls: {
+            ciphers: 'SSLv3'
+        }
+    });
 
 // setup e-mail data with unicode symbols
 var mailOptions = {
