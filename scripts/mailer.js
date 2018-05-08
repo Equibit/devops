@@ -18,7 +18,7 @@ var ibmUrl           = "https://console.bluemix.net/devops/pipelines/"
 //console.log(process.env)
 
 // create reusable transport method (opens pool of SMTP connections)
-var smtpTransport = nodemailer.createTransport("smtps://autobot%40equibitgroup.com:"+encodeURIComponent("" + process.env.EMAIL_PWD + "") + "@smtp.gmail.com:465");
+var smtpTransport = nodemailer.createTransport("smtps://autobot%40equibitgroup.com:"+encodeURIComponent("" + process.env.EMAIL_PWD + "") + "@smtp.office365.com:587");
 
 // setup e-mail data with unicode symbols
 var mailOptions = {
