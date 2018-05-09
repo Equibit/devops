@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-regtest-deployment
+  labels:
+    app: nginx-regtest-app
+    tier: nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-regtest-app
+        tier: nginx
+    spec:
+      volumes:
+      - name: nginx-regtest-pv-storage
+        persistentVolumeClaim:
+          claimName: edc-sha3-regtest-pv-claim
+      containers:
+      - name: nginx
+        image: "nginx:latest"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: nginx-regtest-pv-storage
+          mountPath: "/tmp/nginx"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-regtest-service
+  labels:
+    tier: nginx
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx-regtest-app
+    tier: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: nginx-regtest-port

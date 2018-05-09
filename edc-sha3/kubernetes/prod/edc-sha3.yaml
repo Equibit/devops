@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: edc-sha3-deployment
+  labels:
+    app: edc-sha3-app
+    tier: equibit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: edc-sha3-app
+        tier: equibit
+    spec:
+      volumes:
+      - name: edc-sha3-pv-storage
+        persistentVolumeClaim:
+          claimName: edc-sha3-pv-claim
+      containers:
+      - name: edc-sha3
+        image: "registry.ng.bluemix.net/equibit/edc-sha3-dev:latest"
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: edc-sha3-pv-storage
+          mountPath: "/home/equibit/.equibit"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edc-sha3-service
+  labels:
+    tier: equibit
+spec:
+  type: ClusterIP
+  selector:
+    app: edc-sha3-app
+    tier: equibit
+  ports:
+  - port: 80
+    targetPort: 18331
+    protocol: TCP
+    name: edc-sha3-port

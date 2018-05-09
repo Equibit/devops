@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: edc-sha3-ingress
+spec:
+  rules:
+  - host: edc-sha3.equibit-group-dev.us-east.containers.mybluemix.net
+    http:
+      paths:
+      - backend:
+          serviceName: edc-sha3-service
+          servicePort: 80
