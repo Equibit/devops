@@ -1,46 +1,46 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: edc-sha3-nginx-deployment
   labels:
-    app: nginx-app
-    tier: nginx
+    app: edc-sha3-nginx-app
+    tier: edc-sha3-nginx
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: nginx-app
-        tier: nginx
+        app: edc-sha3-nginx-app
+        tier: edc-sha3-nginx
     spec:
       volumes:
-      - name: nginx-pv-storage
+      - name: edc-sha3-nginx-pv-storage
         persistentVolumeClaim:
           claimName: edc-sha3-pv-claim
       containers:
-      - name: nginx
+      - name: edc-sha3-nginx
         image: "nginx:latest"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 80
         volumeMounts:
-        - name: nginx-pv-storage
+        - name: edc-sha3-nginx-pv-storage
           mountPath: "/tmp/nginx"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: edc-sha3-nginx-service
   labels:
-    tier: nginx
+    tier: edc-sha3-nginx
 spec:
   type: ClusterIP
   selector:
-    app: nginx-app
-    tier: nginx
+    app: edc-sha3-nginx-app
+    tier: edc-sha3-nginx
   ports:
   - port: 80
     targetPort: 80
     protocol: TCP
-    name: nginx-port
+    name: edc-sha3-nginx-port
