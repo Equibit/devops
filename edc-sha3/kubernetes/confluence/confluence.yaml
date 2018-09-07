@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: confluence-deployment
+  labels:
+    app: confluence-app
+    tier: equibit
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: confluence-app
+        tier: equibit
+    spec:
+      volumes:
+      - name: confluence-pv-storage
+        persistentVolumeClaim:
+          claimName: confluence-pv-claim
+      containers:
+      - name: confluence
+        image: "atlassian/confluence-server:latest"
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: confluence-pv-storage
+          mountPath: "/var/atlassian/application-data/confluence"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: confluence-service
+  labels:
+    tier: equibit
+spec:
+  type: LoadBalancer
+  selector:
+    app: confluence-app
+    tier: equibit
+  ports:
+  - port: 80
+    targetPort: 8090
+    protocol: TCP
+    name: confluence-port-http
+  - port: 8091
+    targetPort: 8091
+    protocol: TCP
+    name: confluence-port-synchrony
