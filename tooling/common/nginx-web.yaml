@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-web-deployment
+  labels:
+    app: nginx-web-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-web-app
+    spec:
+      containers:
+      - name: nginx-web
+        image: "registry.ng.bluemix.net/equibit/nginx-equibit-site:0.1"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 443
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-web-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-web-app
+  ports:
+  - port: 80
+    protocol: TCP
+    name: nginx-web-http
+  - port: 443
+    protocol: TCP
+    name: nginx-web-https
