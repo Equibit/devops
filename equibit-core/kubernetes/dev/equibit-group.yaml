@@ -19,7 +19,7 @@ spec:
           claimName: equibit-group-pv-claim
       containers:
       - name: equibit-group
-        image: "registry.ng.bluemix.net/equibitqa/equibit-core-qa:latest"
+        image: "registry.ng.bluemix.net/equibit/equibit-core-dev:latest"
         imagePullPolicy: Always
         volumeMounts:
         - name: equibit-group-pv-storage

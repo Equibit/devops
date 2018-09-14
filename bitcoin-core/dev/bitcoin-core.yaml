@@ -16,7 +16,7 @@ spec:
       volumes:
       - name: bitcoin-core-pv-storage
         persistentVolumeClaim:
-          claimName: bitcoin-core-pv-claim
+          claimName: bitcoin-dev-pv-claim
       containers:
       - name: bitcoin-core
         image: "ruimarinho/bitcoin-core:latest"
@@ -36,8 +36,8 @@ spec:
     app: bitcoin-core-app
     tier: bitcoin
   ports:
-  - port: 8332
-    targetPort: 8332
+  - port: 18443
+    targetPort: 18443
     protocol: TCP
     name: bitcoin-core-port
   type: LoadBalancer

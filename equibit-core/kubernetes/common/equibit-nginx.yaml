@@ -1,20 +1,20 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: equibit-nginx-deployment
   labels:
-    app: nginx-app
+    app: equibit-nginx-app
     tier: nginx
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: nginx-app
+        app: equibit-nginx-app
         tier: nginx
     spec:
       volumes:
-      - name: nginx-pv-storage
+      - name: equibit-nginx-pv-storage
         persistentVolumeClaim:
           claimName: equibit-group-pv-claim
       containers:
@@ -25,19 +25,19 @@ spec:
         - name: http
           containerPort: 80
         volumeMounts:
-        - name: nginx-pv-storage
+        - name: equibit-nginx-pv-storage
           mountPath: "/tmp/nginx"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: equibit-nginx-service
   labels:
     tier: nginx
 spec:
   type: ClusterIP
   selector:
-    app: nginx-app
+    app: equibit-nginx-app
     tier: nginx
   ports:
   - port: 80

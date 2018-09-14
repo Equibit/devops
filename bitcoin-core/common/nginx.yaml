@@ -1,46 +1,46 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: busybox-deployment
+  name: nginx-deployment
   labels:
-    app: busybox-app
-    tier: busybox
+    app: nginx-app
+    tier: nginx
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: busybox-app
-        tier: busybox
+        app: nginx-app
+        tier: nginx
     spec:
       volumes:
-      - name: busybox-pv-storage
+      - name: nginx-pv-storage
         persistentVolumeClaim:
           claimName: bitcoin-core-pv-claim
       containers:
-      - name: busybox
+      - name: nginx
         image: "nginx:latest"
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
           containerPort: 80
         volumeMounts:
-        - name: busybox-pv-storage
-          mountPath: "/tmp/busybox"
+        - name: nginx-pv-storage
+          mountPath: "/tmp/nginx"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: busybox-service
+  name: nginx-service
   labels:
-    tier: busybox
+    tier: nginx
 spec:
   type: ClusterIP
   selector:
-    app: busybox-app
-    tier: busybox
+    app: nginx-app
+    tier: nginx
   ports:
   - port: 80
     targetPort: 80
     protocol: TCP
-    name: busybox-port
+    name: nginx-port

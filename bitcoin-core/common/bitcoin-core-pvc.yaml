@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: bitcoin-core-pv-claim
+  name: bitcoin-dev-pv-claim
   annotations:
     volume.beta.kubernetes.io/storage-class: "ibmc-file-silver"
 spec:
