@@ -41,3 +41,12 @@ spec:
     targetPort: 18331
     protocol: TCP
     name: edc-sha3-regtest-port
+  - port: 18333
+    targetPort: 18333
+    protocol: TCP
+    name: edc-sha3-regtest-port-2
+  - port: 18444
+    targetPort: 18444
+    protocol: TCP
+    name: edc-sha3-regtest-port-3
+
